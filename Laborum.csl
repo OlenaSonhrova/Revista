@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<style xmlns="http://purl.org/net/xbiblio/csl" class="note" version="1.0" demote-non-dropping-particle="sort-separator" default-locale="es-ES">
+  <info>
+    <title>Revista de Derecho de la Seguridad Social. Laborum</title>
+    <title-short>RDSS. Laborum</title-short>
+    <id>http://www.zotero.org/styles/revista-de-derecho-de-la-seguridad-social-laborum</id>
+    <link href="http://www.zotero.org/styles/revista-de-derecho-de-la-seguridad-social-laborum" rel="self"/>
+    <link href="https://revista.laborum.es/index.php/revsegsoc/en/about/submissions" rel="documentation"/>
+    <author>
+      <name>Custom CSL Generator</name>
+    </author>
+    <category citation-format="note"/>
+    <category field="law"/>
+    <category field="social_science"/>
+    <updated>2026-10-07T00:00:00+00:00</updated>
+    <rights license="http://creativecommons.org/licenses/by-sa/3.0/">This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 License</rights>
+  </info>
+
+  <locale xml:lang="es">
+    <terms>
+      <term name="editor" form="short">dir.</term>
+      <term name="editorial-director" form="short">dir.</term>
+      <term name="accessed">consultado</term>
+      <term name="in">en</term>
+      <term name="page" form="short">p.</term>
+      <term name="page">pp.</term>
+    </terms>
+  </locale>
+
+  <!-- Macro definitions -->
+  <macro name="author-note">
+    <names variable="author">
+      <name font-case="lowercase" font-variant="small-caps" initialize-with=". " delimiter="; " delimiter-precedes-last="always"/>
+      <label form="short" prefix=" (" suffix=")"/>
+      <substitute>
+        <names variable="editor"/>
+        <text macro="title"/>
+      </substitute>
+    </names>
+  </macro>
+
+  <macro name="author-bibliography">
+    <names variable="author">
+      <name font-case="lowercase" font-variant="small-caps" name-as-sort-order="all" delimiter="; " delimiter-precedes-last="always"/>
+      <label form="short" prefix=" (" suffix=")"/>
+      <substitute>
+        <names variable="editor"/>
+        <text macro="title"/>
+      </substitute>
+    </names>
+  </macro>
+
+  <macro name="editor">
+    <names variable="editor">
+      <name font-case="lowercase" font-variant="small-caps" initialize-with=". " delimiter="; "/>
+      <label form="short" prefix=" (" suffix=")"/>
+    </names>
+  </macro>
+
+  <macro name="title">
+    <choose>
+      <if type="book report thesis" match="any">
+        <text variable="title" font-style="italic"/>
+      </if>
+      <else-if type="article-journal article-magazine article-newspaper chapter entry-dictionary entry-encyclopedia" match="any">
+        <text variable="title" quotes="true"/>
+      </else-if>
+      <else>
+        <text variable="title" font-style="italic"/>
+      </else>
+    </choose>
+  </macro>
+
+  <macro name="publisher-container">
+    <choose>
+      <if type="chapter paper-conference" match="any">
+        <text term="in" suffix=" "/>
+        <text macro="editor" suffix=": "/>
+        <text variable="container-title" font-style="italic" suffix=", "/>
+      </if>
+      <else-if type="article-journal article-magazine" match="any">
+        <text variable="container-title" font-style="italic"/>
+      </else-if>
+    </choose>
+  </macro>
+
+  <macro name="issuance">
+    <group delimiter=", ">
+      <choose>
+        <if type="article-journal">
+          <text variable="issue" prefix="nº "/>
+        </if>
+      </choose>
+      <text variable="publisher" prefix="Ed. "/>
+      <text variable="publisher-place"/>
+      <date variable="issued">
+        <date-part name="year"/>
+      </date>
+    </group>
+  </macro>
+
+  <macro name="pages">
+    <choose>
+      <if variable="page">
+        <label variable="page" form="short" suffix=" "/>
+        <text variable="page"/>
+      </if>
+    </choose>
+  </macro>
+
+  <macro name="locator">
+    <choose>
+      <if variable="locator">
+        <label variable="locator" form="short" suffix=" "/>
+        <text variable="locator"/>
+      </if>
+    </choose>
+  </macro>
+
+  <macro name="access">
+    <choose>
+      <if variable="DOI">
+        <text variable="DOI" prefix="https://doi.org/"/>
+      </if>
+      <else-if variable="URL">
+        <text variable="URL"/>
+      </else-if>
+    </choose>
+  </macro>
+
+  <!-- Citation formatting (Footnotes) -->
+  <citation disambiguate-add-givenname="true">
+    <layout suffix="." delimiter="; ">
+      <choose>
+        <if position="first">
+          <group delimiter=": ">
+            <text macro="author-note"/>
+            <group delimiter=", ">
+              <text macro="title"/>
+              <text macro="publisher-container"/>
+              <text macro="issuance"/>
+              <text macro="locator"/>
+            </group>
+          </group>
+        </if>
+        <else-if position="ibid-with-locator">
+          <group delimiter=", ">
+            <text term="ibid" font-style="italic"/>
+            <text macro="locator"/>
+          </group>
+        </else-if>
+        <else-if position="ibid">
+          <text term="ibid" font-style="italic"/>
+        </else-if>
+        <else-if position="subsequent">
+          <group delimiter=": ">
+            <text macro="author-note"/>
+            <group delimiter=", ">
+              <date variable="issued" prefix="(" suffix=")">
+                <date-part name="year"/>
+              </date>
+              <text value="op. cit." font-style="italic"/>
+              <text macro="locator"/>
+            </group>
+          </group>
+        </else-if>
+      </choose>
+    </layout>
+  </citation>
+
+  <!-- Bibliography formatting -->
+  <bibliography hanging-indent="true" entry-spacing="0">
+    <sort>
+      <key macro="author-bibliography"/>
+      <key variable="issued"/>
+      <key variable="title"/>
+    </sort>
+    <layout suffix=".">
+      <group delimiter=": ">
+        <text macro="author-bibliography"/>
+        <group delimiter=", ">
+          <text macro="title"/>
+          <text macro="publisher-container"/>
+          <text macro="issuance"/>
+          <text macro="pages"/>
+          <text macro="access"/>
+        </group>
+      </group>
+    </layout>
+  </bibliography>
+</style>
